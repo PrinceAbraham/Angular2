@@ -10,7 +10,7 @@ import {MediaItemService} from './media-item.service';
 
 @Component({
     selector: 'media-item-form',
-    providers: [MediaItemService],
+    // providers: [MediaItemService], is not needed as it is already available in the component tree
     templateUrl: 'app/media-item-form.component.html',
     styleUrls: ['app/media-item-form.component.css']
 })

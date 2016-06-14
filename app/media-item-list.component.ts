@@ -7,7 +7,7 @@ import {MediaItemService} from './media-item.service';
     selector: 'media-item-list',
     directives: [MediaItemComponent],
     pipes: [CategoryListPipe],
-    providers: [MediaItemService],
+    // providers: [MediaItemService], is not needed as it is already available in the component tree
     templateUrl: 'app/media-item-list.component.html',
     styleUrls: ['app/media-item-list.component.css']
 })

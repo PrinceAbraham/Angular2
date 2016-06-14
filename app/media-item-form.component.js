@@ -70,7 +70,7 @@ System.register(['angular2/core', 'angular2/common', './media-item.service'], fu
                 MediaItemFormComponent = __decorate([
                     core_1.Component({
                         selector: 'media-item-form',
-                        providers: [media_item_service_1.MediaItemService],
+                        // providers: [MediaItemService], is not needed as it is already available in the component tree
                         templateUrl: 'app/media-item-form.component.html',
                         styleUrls: ['app/media-item-form.component.css']
                     }), 
