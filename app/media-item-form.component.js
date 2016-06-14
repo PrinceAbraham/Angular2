@@ -29,10 +29,30 @@ System.register(['angular2/core', 'angular2/common'], function(exports_1, contex
                     this.form = new common_1.ControlGroup({
                         //Give properties to the new ControlGroup
                         'medium': new common_1.Control('Movies'),
-                        'name': new common_1.Control(''),
+                        //Validators can be used like this
+                        // 'name' : new Control('', Validators.pattern('[\\w\\-\\s\\/]+')),
+                        // or for multiple validators
+                        'name': new common_1.Control('', common_1.Validators.compose([
+                            common_1.Validators.required,
+                            common_1.Validators.pattern('[\\w\\-\\s\\/]+')
+                        ])),
                         'category': new common_1.Control(''),
-                        'year': new common_1.Control('')
+                        //control calls the validator async
+                        'year': new common_1.Control('', this.yearValidator)
                     });
+                };
+                //Custom Validator YearValidator
+                MediaItemFormComponent.prototype.yearValidator = function (control) {
+                    if (control.value.trim().length === 0) {
+                        return null;
+                    }
+                    var year = parseInt(control.value);
+                    var minYear = 1900;
+                    var maxYear = 2100;
+                    if (year >= minYear && year <= maxYear) {
+                        return null;
+                    }
+                    return { 'year': true };
                 };
                 MediaItemFormComponent.prototype.onSubmit = function (mediaItem) {
                     console.log(mediaItem);
