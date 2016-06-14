@@ -1,4 +1,4 @@
-System.register(['angular2/core', './media-item-list.component', './media-item-form.component'], function(exports_1, context_1) {
+System.register(['angular2/core'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,36 +10,32 @@ System.register(['angular2/core', './media-item-list.component', './media-item-f
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, media_item_list_component_1, media_item_form_component_1;
-    var AppComponent;
+    var core_1;
+    var MediaItemFormComponent;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
-            },
-            function (media_item_list_component_1_1) {
-                media_item_list_component_1 = media_item_list_component_1_1;
-            },
-            function (media_item_form_component_1_1) {
-                media_item_form_component_1 = media_item_form_component_1_1;
             }],
         execute: function() {
-            AppComponent = (function () {
-                function AppComponent() {
+            MediaItemFormComponent = (function () {
+                function MediaItemFormComponent() {
                 }
-                AppComponent = __decorate([
+                MediaItemFormComponent.prototype.onSubmit = function (mediaItem) {
+                    console.log(mediaItem);
+                };
+                MediaItemFormComponent = __decorate([
                     core_1.Component({
-                        selector: 'media-tracker-app',
-                        directives: [media_item_list_component_1.MediaItemListComponent, media_item_form_component_1.MediaItemFormComponent],
-                        templateUrl: 'app/app.component.html',
-                        styleUrls: ['app/app.component.css']
+                        selector: 'media-item-form',
+                        templateUrl: 'app/media-item-form.component.html',
+                        styleUrls: ['app/media-item-form.component.css']
                     }), 
                     __metadata('design:paramtypes', [])
-                ], AppComponent);
-                return AppComponent;
+                ], MediaItemFormComponent);
+                return MediaItemFormComponent;
             }());
-            exports_1("AppComponent", AppComponent);
+            exports_1("MediaItemFormComponent", MediaItemFormComponent);
         }
     }
 });
-//# sourceMappingURL=app.component.js.map
+//# sourceMappingURL=media-item-form.component.js.map
