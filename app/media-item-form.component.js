@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/common'], function(exports_1, context_1) {
+System.register(['angular2/core', 'angular2/common', './media-item.service'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', 'angular2/common'], function(exports_1, contex
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, common_1;
+    var core_1, common_1, media_item_service_1;
     var MediaItemFormComponent;
     return {
         setters:[
@@ -19,14 +19,21 @@ System.register(['angular2/core', 'angular2/common'], function(exports_1, contex
             },
             function (common_1_1) {
                 common_1 = common_1_1;
+            },
+            function (media_item_service_1_1) {
+                media_item_service_1 = media_item_service_1_1;
             }],
         execute: function() {
             MediaItemFormComponent = (function () {
-                function MediaItemFormComponent() {
+                // constructor (typeScript) for formBuilder and mediaItemService
+                function MediaItemFormComponent(formBuilder, mediaItemService) {
+                    this.formBuilder = formBuilder;
+                    this.mediaItemService = mediaItemService;
                 }
                 //call initialize during the lifecycle
                 MediaItemFormComponent.prototype.ngOnInit = function () {
-                    this.form = new common_1.ControlGroup({
+                    //change new ControlGroup to this.formBuilder.group
+                    this.form = this.formBuilder.group({
                         //Give properties to the new ControlGroup
                         'medium': new common_1.Control('Movies'),
                         //Validators can be used like this
@@ -58,14 +65,16 @@ System.register(['angular2/core', 'angular2/common'], function(exports_1, contex
                 };
                 MediaItemFormComponent.prototype.onSubmit = function (mediaItem) {
                     console.log(mediaItem);
+                    this.mediaItemService.add(mediaItem);
                 };
                 MediaItemFormComponent = __decorate([
                     core_1.Component({
                         selector: 'media-item-form',
+                        providers: [media_item_service_1.MediaItemService],
                         templateUrl: 'app/media-item-form.component.html',
                         styleUrls: ['app/media-item-form.component.css']
                     }), 
-                    __metadata('design:paramtypes', [])
+                    __metadata('design:paramtypes', [common_1.FormBuilder, media_item_service_1.MediaItemService])
                 ], MediaItemFormComponent);
                 return MediaItemFormComponent;
             }());

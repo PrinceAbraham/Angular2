@@ -2,10 +2,15 @@ import {Component} from 'angular2/core';
 
 //Model Driven Form uses control and control group
 //Built-in Validators
-import {ControlGroup, Control, Validators} from 'angular2/common';
+//Create FormBuilder class
+import {ControlGroup, Control, Validators, FormBuilder} from 'angular2/common';
+
+//Inject Service
+import {MediaItemService} from './media-item.service';
 
 @Component({
     selector: 'media-item-form',
+    providers: [MediaItemService],
     templateUrl: 'app/media-item-form.component.html',
     styleUrls: ['app/media-item-form.component.css']
 })
@@ -13,9 +18,15 @@ export class MediaItemFormComponent {
     //decalare a form
     form;
 
+    // constructor (typeScript) for formBuilder and mediaItemService
+    constructor(private formBuilder: FormBuilder, private mediaItemService: MediaItemService){
+
+    }
+
     //call initialize during the lifecycle
     ngOnInit(){
-        this.form = new ControlGroup({
+        //change new ControlGroup to this.formBuilder.group
+        this.form = this.formBuilder.group({
             //Give properties to the new ControlGroup
             'medium': new Control('Movies'), //Setting default to Movies
             //Validators can be used like this
@@ -49,5 +60,6 @@ export class MediaItemFormComponent {
 
     onSubmit(mediaItem){
         console.log(mediaItem);
+        this.mediaItemService.add(mediaItem);
     }
 }

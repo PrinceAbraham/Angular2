@@ -1,4 +1,4 @@
-System.register(['angular2/core', './media-item.component', './category-list.pipe'], function(exports_1, context_1) {
+System.register(['angular2/core', './media-item.component', './category-list.pipe', './media-item.service'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', './media-item.component', './category-list.pip
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, media_item_component_1, category_list_pipe_1;
+    var core_1, media_item_component_1, category_list_pipe_1, media_item_service_1;
     var MediaItemListComponent;
     return {
         setters:[
@@ -22,66 +22,31 @@ System.register(['angular2/core', './media-item.component', './category-list.pip
             },
             function (category_list_pipe_1_1) {
                 category_list_pipe_1 = category_list_pipe_1_1;
+            },
+            function (media_item_service_1_1) {
+                media_item_service_1 = media_item_service_1_1;
             }],
         execute: function() {
             MediaItemListComponent = (function () {
-                function MediaItemListComponent() {
-                    this.mediaItems = [
-                        {
-                            id: 1,
-                            name: "Firebug",
-                            medium: "Series",
-                            category: "Science Fiction",
-                            year: 2010,
-                            watchedOn: 1294166565384,
-                            isFavorite: false
-                        },
-                        {
-                            id: 2,
-                            name: "The Small Tall",
-                            medium: "Movies",
-                            category: "Comedy",
-                            year: 2015,
-                            watchedOn: null,
-                            isFavorite: true
-                        }, {
-                            id: 3,
-                            name: "The Redemption",
-                            medium: "Movies",
-                            category: "Action",
-                            year: 2016,
-                            watchedOn: null,
-                            isFavorite: false
-                        }, {
-                            id: 4,
-                            name: "Hoopers",
-                            medium: "Series",
-                            category: "Drama",
-                            year: null,
-                            watchedOn: null,
-                            isFavorite: true
-                        }, {
-                            id: 5,
-                            name: "Happy Joe: Cheery Road",
-                            medium: "Movies",
-                            category: "Action",
-                            year: 2015,
-                            watchedOn: 1457166565384,
-                            isFavorite: false
-                        }
-                    ];
+                function MediaItemListComponent(mediaItemService) {
+                    this.mediaItemService = mediaItemService;
                 }
+                MediaItemListComponent.prototype.ngOnInit = function () {
+                    this.mediaItems = this.mediaItemService.get();
+                };
                 MediaItemListComponent.prototype.onMediaItemDeleted = function (mediaItem) {
+                    this.mediaItemService.delete(mediaItem);
                 };
                 MediaItemListComponent = __decorate([
                     core_1.Component({
                         selector: 'media-item-list',
                         directives: [media_item_component_1.MediaItemComponent],
                         pipes: [category_list_pipe_1.CategoryListPipe],
+                        providers: [media_item_service_1.MediaItemService],
                         templateUrl: 'app/media-item-list.component.html',
                         styleUrls: ['app/media-item-list.component.css']
                     }), 
-                    __metadata('design:paramtypes', [])
+                    __metadata('design:paramtypes', [media_item_service_1.MediaItemService])
                 ], MediaItemListComponent);
                 return MediaItemListComponent;
             }());
