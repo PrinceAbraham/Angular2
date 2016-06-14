@@ -42,7 +42,9 @@ export class MediaItemFormComponent {
         if(year >= minYear && year <= maxYear){
             return null;
         }
-        return {'year': true};
+        //You can return anything.
+        //Anything but null will invalidate the field and add the property to the errors
+        return {'year': {'min' : minYear,'max' :maxYear}};
     }
 
     onSubmit(mediaItem){
