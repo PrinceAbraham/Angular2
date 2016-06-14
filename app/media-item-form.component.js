@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/common', './media-item.service'], function(exports_1, context_1) {
+System.register(['angular2/core', 'angular2/common', './media-item.service', './providers'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -13,7 +13,7 @@ System.register(['angular2/core', 'angular2/common', './media-item.service'], fu
     var __param = (this && this.__param) || function (paramIndex, decorator) {
         return function (target, key) { decorator(target, key, paramIndex); }
     };
-    var core_1, common_1, media_item_service_1;
+    var core_1, common_1, media_item_service_1, providers_1;
     var MediaItemFormComponent;
     return {
         setters:[
@@ -25,11 +25,17 @@ System.register(['angular2/core', 'angular2/common', './media-item.service'], fu
             },
             function (media_item_service_1_1) {
                 media_item_service_1 = media_item_service_1_1;
+            },
+            function (providers_1_1) {
+                providers_1 = providers_1_1;
             }],
         execute: function() {
             MediaItemFormComponent = (function () {
                 // constructor (typeScript) for formBuilder and mediaItemService
-                function MediaItemFormComponent(formBuilder, mediaItemService, lookupList) {
+                function MediaItemFormComponent(formBuilder, mediaItemService, 
+                    //This tells Angular that we want it to pass in the lookup lists value 
+                    //object into this constructor during constructor injection
+                    lookupList) {
                     this.formBuilder = formBuilder;
                     this.mediaItemService = mediaItemService;
                     this.lookupList = lookupList;
@@ -78,7 +84,7 @@ System.register(['angular2/core', 'angular2/common', './media-item.service'], fu
                         templateUrl: 'app/media-item-form.component.html',
                         styleUrls: ['app/media-item-form.component.css']
                     }),
-                    __param(2, core_1.Inject('LOOKUP_LIST')), 
+                    __param(2, core_1.Inject(providers_1.LOOKUP_LISTS)), 
                     __metadata('design:paramtypes', [common_1.FormBuilder, media_item_service_1.MediaItemService, Object])
                 ], MediaItemFormComponent);
                 return MediaItemFormComponent;

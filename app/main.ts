@@ -4,12 +4,10 @@ import {AppComponent} from './app.component';
 import {MediaItemService} from './media-item.service';
 //provider
 import {provide} from 'angular2/core';
+import {LOOKUP_LISTS, lookupLists} from './providers';
 
-var lookupList = {
-    mediums: ['Movies', 'Series']
-};
 
 bootstrap(AppComponent, [
     MediaItemService,
-    provide('LOOKUP_LIST',{useValue : lookupList})
+    provide(LOOKUP_LISTS,{useValue : lookupLists})
     ]);

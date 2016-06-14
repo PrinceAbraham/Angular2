@@ -9,6 +9,8 @@ import {ControlGroup, Control, Validators, FormBuilder} from 'angular2/common';
 //Inject Service
 import {MediaItemService} from './media-item.service';
 
+import {LOOKUP_LISTS} from './providers';
+
 @Component({
     selector: 'media-item-form',
     // providers: [MediaItemService], is not needed as it is already available in the component tree
@@ -22,7 +24,9 @@ export class MediaItemFormComponent {
     // constructor (typeScript) for formBuilder and mediaItemService
     constructor(private formBuilder: FormBuilder, 
     private mediaItemService: MediaItemService,
-    @Inject('LOOKUP_LIST') public lookupList){
+    //This tells Angular that we want it to pass in the lookup lists value 
+    //object into this constructor during constructor injection
+    @Inject(LOOKUP_LISTS) public lookupList){
 
     }
 
