@@ -1,4 +1,5 @@
-import {Component} from 'angular2/core';
+//Use Inject from angular2/core
+import {Component, Inject} from 'angular2/core';
 
 //Model Driven Form uses control and control group
 //Built-in Validators
@@ -19,7 +20,9 @@ export class MediaItemFormComponent {
     form;
 
     // constructor (typeScript) for formBuilder and mediaItemService
-    constructor(private formBuilder: FormBuilder, private mediaItemService: MediaItemService){
+    constructor(private formBuilder: FormBuilder, 
+    private mediaItemService: MediaItemService,
+    @Inject('LOOKUP_LIST') public lookupList){
 
     }
 
