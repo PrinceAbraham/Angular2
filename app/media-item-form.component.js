@@ -1,4 +1,4 @@
-System.register(['angular2/core'], function(exports_1, context_1) {
+System.register(['angular2/core', 'angular2/common'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,17 +10,30 @@ System.register(['angular2/core'], function(exports_1, context_1) {
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1;
+    var core_1, common_1;
     var MediaItemFormComponent;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
+            },
+            function (common_1_1) {
+                common_1 = common_1_1;
             }],
         execute: function() {
             MediaItemFormComponent = (function () {
                 function MediaItemFormComponent() {
                 }
+                //call initialize during the lifecycle
+                MediaItemFormComponent.prototype.ngOnInit = function () {
+                    this.form = new common_1.ControlGroup({
+                        //Give properties to the new ControlGroup
+                        'medium': new common_1.Control('Movies'),
+                        'name': new common_1.Control(''),
+                        'category': new common_1.Control(''),
+                        'year': new common_1.Control('')
+                    });
+                };
                 MediaItemFormComponent.prototype.onSubmit = function (mediaItem) {
                     console.log(mediaItem);
                 };
