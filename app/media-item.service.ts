@@ -1,5 +1,5 @@
 //To use Http
-import {Http} from 'angular2/http';
+import {Http, URLSearchParams} from 'angular2/http';
 import {Injectable} from 'angular2/core';
 import 'rxjs/add/operator/map';
 //It handles letting Angular know that 
@@ -9,13 +9,19 @@ export class MediaItemService{
 
     //constructor
     constructor(private http: Http){}
-
-    get(){
+    //medium is the search param here.
+    get(medium){
+        var searchParams = new URLSearchParams();
+        //string and the value
+        searchParams.append('medium', medium);
         //need to unwrap the HTTP response objects that the HTTP.get method sends back,
         //because we still want the service to return mediaItems, not an HTTP response object
         //that the component has to deal with.
         //mediaitems?medium= is the url
-        return this.http.get('mediaitems?medium=')
+        //The request options support a search property which can be a string
+        //or an instance of URLSearchParams
+        // it automatically adds params ?mediaItem=(param)
+        return this.http.get('mediaitems', {search: searchParams})
         //and so map is used
         //The map method is expecting a function as its argument. This function will receive 
         //an argument that will be one of the HTTP response objects in the observable

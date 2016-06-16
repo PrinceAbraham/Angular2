@@ -13,19 +13,26 @@ import {MediaItemService} from './media-item.service';
 })
 export class MediaItemListComponent {
 
+    medium='';
+    mediaItems=[];
     constructor(private mediaItemService: MediaItemService){}
     ngOnInit(){
+        this.getMediaItems(this.medium);
+    }  
+    onMediaItemDeleted(mediaItem) {
+        this.mediaItemService.delete(mediaItem);
+    }
+
+    getMediaItems(medium){
+        this.medium = medium;
         //this.mediaItems = this.mediaItemService.get()
-        this.mediaItemService.get()
+        this.mediaItemService.get(this.medium)
         //won't execute until there is a call to subscribe
         //which will be a successful return of the mediaItems
         //write an arrow function with mediaItems as the parameter
         .subscribe(mediaItems => {
             this.mediaItems = mediaItems;
-        });
-    }  
-    onMediaItemDeleted(mediaItem) {
-        this.mediaItemService.delete(mediaItem);
+        });   
     }
-    mediaItems;
+
 }

@@ -30,17 +30,23 @@ System.register(['angular2/core', './media-item.component', './category-list.pip
             MediaItemListComponent = (function () {
                 function MediaItemListComponent(mediaItemService) {
                     this.mediaItemService = mediaItemService;
+                    this.medium = '';
+                    this.mediaItems = [];
                 }
                 MediaItemListComponent.prototype.ngOnInit = function () {
-                    var _this = this;
-                    //this.mediaItems = this.mediaItemService.get()
-                    this.mediaItemService.get()
-                        .subscribe(function (mediaItems) {
-                        _this.mediaItems = mediaItems;
-                    });
+                    this.getMediaItems(this.medium);
                 };
                 MediaItemListComponent.prototype.onMediaItemDeleted = function (mediaItem) {
                     this.mediaItemService.delete(mediaItem);
+                };
+                MediaItemListComponent.prototype.getMediaItems = function (medium) {
+                    var _this = this;
+                    this.medium = medium;
+                    //this.mediaItems = this.mediaItemService.get()
+                    this.mediaItemService.get(this.medium)
+                        .subscribe(function (mediaItems) {
+                        _this.mediaItems = mediaItems;
+                    });
                 };
                 MediaItemListComponent = __decorate([
                     core_1.Component({

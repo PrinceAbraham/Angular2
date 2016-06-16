@@ -73,12 +73,19 @@ System.register(['angular2/http', 'angular2/core', 'rxjs/add/operator/map'], fun
                         }
                     ];
                 }
-                MediaItemService.prototype.get = function () {
+                //medium is the search param here.
+                MediaItemService.prototype.get = function (medium) {
+                    var searchParams = new http_1.URLSearchParams();
+                    //string and the value
+                    searchParams.append('medium', medium);
                     //need to unwrap the HTTP response objects that the HTTP.get method sends back,
                     //because we still want the service to return mediaItems, not an HTTP response object
                     //that the component has to deal with.
                     //mediaitems?medium= is the url
-                    return this.http.get('mediaitems?medium=')
+                    //The request options support a search property which can be a string
+                    //or an instance of URLSearchParams
+                    // it automatically adds params ?mediaItem=(param)
+                    return this.http.get('mediaitems', { search: searchParams })
                         .map(function (response) {
                         return response.json().mediaItems;
                     });
