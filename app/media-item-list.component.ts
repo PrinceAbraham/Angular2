@@ -20,7 +20,11 @@ export class MediaItemListComponent {
         this.getMediaItems(this.medium);
     }  
     onMediaItemDeleted(mediaItem) {
-        this.mediaItemService.delete(mediaItem);
+        this.mediaItemService.delete(mediaItem)
+        .subscribe(() => {
+            //refreshes the list after delete
+            this.getMediaItems(this.medium);
+        });
     }
 
     getMediaItems(medium){

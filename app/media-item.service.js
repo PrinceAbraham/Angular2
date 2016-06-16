@@ -91,13 +91,15 @@ System.register(['angular2/http', 'angular2/core', 'rxjs/add/operator/map'], fun
                     });
                 };
                 MediaItemService.prototype.add = function (mediaItem) {
-                    this.mediaItems.push(mediaItem);
+                    var header = new http_1.Headers({ 'Content-Type': 'application/json' });
+                    return this.http.post('mediaitems', JSON.stringify(mediaItem), { headers: header })
+                        .map(function (response) { });
                 };
                 MediaItemService.prototype.delete = function (mediaItem) {
-                    var index = this.mediaItems.indexOf(mediaItem);
-                    if (index >= 0) {
-                        this.mediaItems.splice(index, 1);
-                    }
+                    //build the string with mediaitems/string and a variable replacement 
+                    //for the mediaitem.id property from the mediaitem passed in
+                    return this.http.delete("mediaitems/" + mediaItem.id)
+                        .map(function (response) { });
                 };
                 MediaItemService = __decorate([
                     core_1.Injectable(), 

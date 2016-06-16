@@ -1,5 +1,5 @@
 //To use Http
-import {Http, URLSearchParams} from 'angular2/http';
+import {Http, URLSearchParams, Headers} from 'angular2/http';
 import {Injectable} from 'angular2/core';
 import 'rxjs/add/operator/map';
 //It handles letting Angular know that 
@@ -30,13 +30,16 @@ export class MediaItemService{
         });
     }
     add(mediaItem){
-        this.mediaItems.push(mediaItem);
+        var header = new Headers({'Content-Type': 'application/json'});
+        return this.http.post('mediaitems', JSON.stringify(mediaItem),
+        {headers: header})
+        .map(response =>{});
     }
     delete(mediaItem){
-        var index = this.mediaItems.indexOf(mediaItem);
-        if(index >=0){
-            this.mediaItems.splice(index, 1);
-        }
+        //build the string with mediaitems/string and a variable replacement 
+        //for the mediaitem.id property from the mediaitem passed in
+        return this.http.delete(`mediaitems/${mediaItem.id}`)
+        .map(response =>{});
     }
     mediaItems = [
         {
