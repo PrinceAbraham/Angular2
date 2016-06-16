@@ -32,7 +32,12 @@ System.register(['angular2/core', './media-item.component', './category-list.pip
                     this.mediaItemService = mediaItemService;
                 }
                 MediaItemListComponent.prototype.ngOnInit = function () {
-                    this.mediaItems = this.mediaItemService.get();
+                    var _this = this;
+                    //this.mediaItems = this.mediaItemService.get()
+                    this.mediaItemService.get()
+                        .subscribe(function (mediaItems) {
+                        _this.mediaItems = mediaItems;
+                    });
                 };
                 MediaItemListComponent.prototype.onMediaItemDeleted = function (mediaItem) {
                     this.mediaItemService.delete(mediaItem);

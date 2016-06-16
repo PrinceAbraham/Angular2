@@ -15,7 +15,14 @@ export class MediaItemListComponent {
 
     constructor(private mediaItemService: MediaItemService){}
     ngOnInit(){
-        this.mediaItems = this.mediaItemService.get();
+        //this.mediaItems = this.mediaItemService.get()
+        this.mediaItemService.get()
+        //won't execute until there is a call to subscribe
+        //which will be a successful return of the mediaItems
+        //write an arrow function with mediaItems as the parameter
+        .subscribe(mediaItems => {
+            this.mediaItems = mediaItems;
+        });
     }  
     onMediaItemDeleted(mediaItem) {
         this.mediaItemService.delete(mediaItem);

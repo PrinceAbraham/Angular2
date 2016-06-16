@@ -1,6 +1,27 @@
+//To use Http
+import {Http} from 'angular2/http';
+import {Injectable} from 'angular2/core';
+import 'rxjs/add/operator/map';
+//It handles letting Angular know that 
+//this class it decorates needs to be part of the dependency injection plan.
+@Injectable()
 export class MediaItemService{
+
+    //constructor
+    constructor(private http: Http){}
+
     get(){
-        return this.mediaItems;
+        //need to unwrap the HTTP response objects that the HTTP.get method sends back,
+        //because we still want the service to return mediaItems, not an HTTP response object
+        //that the component has to deal with.
+        //mediaitems?medium= is the url
+        return this.http.get('mediaitems?medium=')
+        //and so map is used
+        //The map method is expecting a function as its argument. This function will receive 
+        //an argument that will be one of the HTTP response objects in the observable
+        .map(response => {
+            return response.json().mediaItems;
+        });
     }
     add(mediaItem){
         this.mediaItems.push(mediaItem);
