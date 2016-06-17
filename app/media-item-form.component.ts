@@ -10,6 +10,10 @@ import {ControlGroup, Control, Validators, FormBuilder} from 'angular2/common';
 import {MediaItemService} from './media-item.service';
 
 import {LOOKUP_LISTS} from './providers';
+//Use the router class to do router navigation
+//The router class is used from within code rather than from within a template
+import {Router} from 'angular2/router';
+
 
 @Component({
     selector: 'media-item-form',
@@ -26,7 +30,8 @@ export class MediaItemFormComponent {
     private mediaItemService: MediaItemService,
     //This tells Angular that we want it to pass in the lookup lists value 
     //object into this constructor during constructor injection
-    @Inject(LOOKUP_LISTS) public lookupList){
+    @Inject(LOOKUP_LISTS) public lookupList,
+    private router: Router){
 
     }
 
@@ -69,5 +74,7 @@ export class MediaItemFormComponent {
         console.log(mediaItem);
         this.mediaItemService.add(mediaItem)
         .subscribe();
+        //Redirects to the List of the medium specified
+        this.router.navigate(['../List', { medium: mediaItem.medium}])
     }
 }

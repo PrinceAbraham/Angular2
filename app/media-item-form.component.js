@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/common', './media-item.service', './providers'], function(exports_1, context_1) {
+System.register(['angular2/core', 'angular2/common', './media-item.service', './providers', 'angular2/router'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -13,7 +13,7 @@ System.register(['angular2/core', 'angular2/common', './media-item.service', './
     var __param = (this && this.__param) || function (paramIndex, decorator) {
         return function (target, key) { decorator(target, key, paramIndex); }
     };
-    var core_1, common_1, media_item_service_1, providers_1;
+    var core_1, common_1, media_item_service_1, providers_1, router_1;
     var MediaItemFormComponent;
     return {
         setters:[
@@ -28,6 +28,9 @@ System.register(['angular2/core', 'angular2/common', './media-item.service', './
             },
             function (providers_1_1) {
                 providers_1 = providers_1_1;
+            },
+            function (router_1_1) {
+                router_1 = router_1_1;
             }],
         execute: function() {
             MediaItemFormComponent = (function () {
@@ -35,10 +38,11 @@ System.register(['angular2/core', 'angular2/common', './media-item.service', './
                 function MediaItemFormComponent(formBuilder, mediaItemService, 
                     //This tells Angular that we want it to pass in the lookup lists value 
                     //object into this constructor during constructor injection
-                    lookupList) {
+                    lookupList, router) {
                     this.formBuilder = formBuilder;
                     this.mediaItemService = mediaItemService;
                     this.lookupList = lookupList;
+                    this.router = router;
                 }
                 //call initialize during the lifecycle
                 MediaItemFormComponent.prototype.ngOnInit = function () {
@@ -77,6 +81,8 @@ System.register(['angular2/core', 'angular2/common', './media-item.service', './
                     console.log(mediaItem);
                     this.mediaItemService.add(mediaItem)
                         .subscribe();
+                    //Redirects to the List of the medium specified
+                    this.router.navigate(['../List', { medium: mediaItem.medium }]);
                 };
                 MediaItemFormComponent = __decorate([
                     core_1.Component({
@@ -86,7 +92,7 @@ System.register(['angular2/core', 'angular2/common', './media-item.service', './
                         styleUrls: ['app/media-item-form.component.css']
                     }),
                     __param(2, core_1.Inject(providers_1.LOOKUP_LISTS)), 
-                    __metadata('design:paramtypes', [common_1.FormBuilder, media_item_service_1.MediaItemService, Object])
+                    __metadata('design:paramtypes', [common_1.FormBuilder, media_item_service_1.MediaItemService, Object, router_1.Router])
                 ], MediaItemFormComponent);
                 return MediaItemFormComponent;
             }());

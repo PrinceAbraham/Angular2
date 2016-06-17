@@ -1,4 +1,4 @@
-System.register(['angular2/core', './media-item-list.component', './media-item-form.component'], function(exports_1, context_1) {
+System.register(['angular2/core', './media-item-list.component', './media-item-form.component', 'angular2/router'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', './media-item-list.component', './media-item-f
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, media_item_list_component_1, media_item_form_component_1;
+    var core_1, media_item_list_component_1, media_item_form_component_1, router_1;
     var AppComponent;
     return {
         setters:[
@@ -22,15 +22,26 @@ System.register(['angular2/core', './media-item-list.component', './media-item-f
             },
             function (media_item_form_component_1_1) {
                 media_item_form_component_1 = media_item_form_component_1_1;
+            },
+            function (router_1_1) {
+                router_1 = router_1_1;
             }],
         execute: function() {
             AppComponent = (function () {
                 function AppComponent() {
                 }
                 AppComponent = __decorate([
+                    router_1.RouteConfig([
+                        {
+                            path: '/:medium', component: media_item_list_component_1.MediaItemListComponent, name: 'List'
+                        },
+                        {
+                            path: '/add', component: media_item_form_component_1.MediaItemFormComponent, name: 'AddMediaItem'
+                        }
+                    ]),
                     core_1.Component({
                         selector: 'media-tracker-app',
-                        directives: [media_item_list_component_1.MediaItemListComponent, media_item_form_component_1.MediaItemFormComponent],
+                        directives: [router_1.ROUTER_DIRECTIVES],
                         templateUrl: 'app/app.component.html',
                         styleUrls: ['app/app.component.css']
                     }), 
